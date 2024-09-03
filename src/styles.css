@@ -1,0 +1,14 @@
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.logo{
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+.formEdaniel{
+    border-radius: 30px;
+}
