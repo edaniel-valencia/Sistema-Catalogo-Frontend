@@ -50,7 +50,10 @@
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" class="px-4 py-4">#</th>
-              <th scope="col" class="px-4 py-4">Usuarios</th>
+              <th scope="col" class="px-4 py-4">Apellidos</th>
+              <th scope="col" class="px-4 py-4">Nombres</th>
+              <th scope="col" class="px-4 py-4">Email</th>
+              <th scope="col" class="px-4 py-4">Credencil</th>
               <th scope="col" class="px-4 py-3">Estado</th>
               <th scope="col" class="px-4 py-3">Opciones<span class="sr-only">Opciones</span></th>
             </tr>
@@ -60,10 +63,19 @@
               <td class="px-4 py-3">{{ item.Uid }}</td>
               <td scope="row"
                 class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white max-w-[12rem] truncate">
+               {{ item.Ulastname }}
+              </td>
+              <td scope="row"
+                class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white max-w-[12rem] truncate">
                 {{ item.Uname }}
               </td>
 
-
+              <td class="px-4 py-3 max-w-[12rem] truncate">
+                {{ item.Uemail }}
+              </td>
+              <td class="px-4 py-3 max-w-[12rem] truncate">
+                {{ item.Ucredential }}
+              </td>
               <td class="px-6 py-4">
                 <div class="flex items-center">
                   <div [ngClass]="{
@@ -249,10 +261,11 @@
             </div>
           </div>
           <dl>
-            <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
-              {{item.Uname}}
+            <dt class=" py-1 font-semibold leading-none text-gray-900 dark:text-white">
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white ">{{item.Ulastname}} {{item.Uname}}</h5>
             </dt>
-
+            <dt class=" truncate"><b>Email: </b> {{item.Uemail}}</dt>
+            <dt class="mb-4 truncate"><b>Credencial: </b> {{item.Ucredential}}</dt>
             <dd class="mb-4 font-light text-gray-500 sm:mb-2 dark:text-gray-400">
               <div class="flex mb-4 items-center">
                 <p [ngClass]="{
@@ -311,9 +324,30 @@
           <div class="grid gap-4 mb-4 sm:grid-cols-1">
             <div>
               <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                Nombre
+                Nombres
               </label>
               <input type="text" id="name" formControlName="name"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+            </div>
+            <div>
+              <label for="lastname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Apellidos
+              </label>
+              <input type="text" id="lastname" formControlName="lastname"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+            </div>
+            <div>
+              <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Email
+              </label>
+              <input type="text" id="email" formControlName="email"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+            </div>
+            <div>
+              <label for="credential" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Credential
+              </label>
+              <input type="text" id="credential" formControlName="credential"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
             </div>
 

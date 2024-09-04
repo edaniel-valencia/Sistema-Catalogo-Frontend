@@ -57,7 +57,7 @@ export class UserComponent {
       name: ['', Validators.required],
       lastname: ['', Validators.required],
       email: ['', Validators.required],
-      password: ['', Validators.required],
+      // password: ['', Validators.required],
       credential: ['', Validators.required],
       status: ['', Validators.required]
       
@@ -75,6 +75,10 @@ export class UserComponent {
     if (data) {
       this.formUpdate.patchValue({
         name: data.Uname,    
+        lastname: data.Ulastname,    
+        email: data.Uemail,    
+        credential: data.Ucredential,    
+        status: data.Ustatus,    
       });
       this.ModalId = data.Uid;
     } else {
@@ -93,8 +97,6 @@ export class UserComponent {
   isModalOpen(modalType: 'Create' | 'Read' | 'Update' | 'Delete'): boolean {
     return this.currentModalType === modalType;
   }
-
-
  
   readUser(page: number = 1): void {
     this.currentPage = page;
@@ -102,8 +104,7 @@ export class UserComponent {
       this.totalItems = data.length;
       this.listUser = data.slice((page - 1) * this.itemsPerPage, page * this.itemsPerPage);
       this.updateItemRange();
-      console.log(data);
-      
+      console.log(data);    
     });
   }
 
@@ -171,8 +172,14 @@ export class UserComponent {
     const user: User = {
       Uid: userId,
       Uname: this.formUpdate.value.name,
+      Ulastname: this.formUpdate.value.lastname,
+      Uemail: this.formUpdate.value.email,
+      Ucredential: this.formUpdate.value.credential,
       Ustatus: this.formUpdate.value.status
     };
+
+    console.log(user);
+    
 
     this.loading = true;
 
