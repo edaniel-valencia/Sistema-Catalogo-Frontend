@@ -13,7 +13,6 @@ import { AddTokenInterceptor } from '../utils/add-token.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductComponent } from './product/product.component';
-import { PaginationComponent } from '../shared/pagination/pagination.component';
 import { SharedModule } from '../shared/shared.module';
 
 
@@ -24,7 +23,7 @@ import { SharedModule } from '../shared/shared.module';
     RoleComponent,
     DashboardComponent,
     HomeComponent,
-    UserComponent
+    UserComponent,
     ],
   imports: [
     ReactiveFormsModule,

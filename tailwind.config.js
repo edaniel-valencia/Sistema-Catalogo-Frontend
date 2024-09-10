@@ -4,6 +4,7 @@ module.exports = {
     "./srchtml,ts}",
     "./src/**/*.{html,ts}",
     "./node_modules/flowbite/**/*.js", // add this line    
+    
   ],
   theme: {
     extend: {},
@@ -12,6 +13,7 @@ module.exports = {
   plugins: [
     require('flowbite/plugin')({
       charts: true,
+      type: "area"
   }),
   ],
   darkMode: 'class',

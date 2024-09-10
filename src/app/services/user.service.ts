@@ -29,9 +29,6 @@ export class UserService {
     return this.http.get<User[]>(`${this.myAppUrl}${this.myAPIUrl}/read`, {params});
   }
 
-  signIn(user: User): Observable<any>{
-    return this.http.post(`${this.myAppUrl}${this.myAPIUrl}/register`, user);
-  }
 
   createUser(user: FormData): Observable<any> {
     return this.http.post(`${this.myAppUrl}${this.myAPIUrl}/create`, user);

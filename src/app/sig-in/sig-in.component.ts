@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/interfaces/user';
 import { ErrorService } from 'src/app/services/error.service';
 import { UserService } from 'src/app/services/user.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-sig-in',
@@ -22,7 +23,7 @@ export class SigInComponent implements OnInit {
   loading: boolean = false;
   constructor(
     private toastr: ToastrService,
-    private _userService: UserService,
+    private _authService: AuthService,
     private router: Router,
     private _errorService: ErrorService  
   ) { }
@@ -56,11 +57,9 @@ export class SigInComponent implements OnInit {
 
     this.loading = true
 
-    // this._userService.signIn(user).subscribe({
+   
 
-    // })
-
-    this._userService.signIn(user).subscribe({
+    this._authService.signin(user).subscribe({
       next: (v) => {
         this.loading = false
         this.toastr.success(`El usuario ${this.Uname} ${this.Ulastname} fue registrado exitosamente", "Usuario Registrado`)

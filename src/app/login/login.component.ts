@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/interfaces/user';
 import { ErrorService } from 'src/app/services/error.service';
 import { UserService } from 'src/app/services/user.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -19,13 +20,15 @@ export class LoginComponent  implements OnInit{
 
   constructor(
     private toastr: ToastrService,
-    private _userService:  UserService,
+    // private _userService:  UserService,
+    private _authService:  AuthService,
     private router: Router,
     private _errorService: ErrorService
   ){}
 
   ngOnInit(): void {}
-  login(){
+
+  loginUser(){
     if (this.Uemail == '' || this.Upassword == '') {
       this.toastr.error('Todos los campos son obligatorios!', 'Error');
       return
@@ -38,7 +41,7 @@ export class LoginComponent  implements OnInit{
     }
     this.loading =  true
 
-    this._userService.login(user).subscribe({
+    this._authService.login(user).subscribe({
       next: (response: any) => {
         this.loading =  false
         const token = response.token

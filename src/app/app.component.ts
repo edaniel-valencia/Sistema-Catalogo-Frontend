@@ -10,7 +10,7 @@ import { filter } from 'rxjs';
 })
 export class AppComponent implements OnInit, AfterViewInit {
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     // Manejar la navegación y re-inicializar Flowbite
@@ -19,6 +19,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     ).subscribe(() => {
       initFlowbite();
     });
+
+   
   }
 
   ngAfterViewInit(): void {

@@ -7,4 +7,6 @@ import {GuardService} from '../services/guard.service'
 export const AuthGuard: CanDeactivateFn<DashboardComponent> = (component, currentRoute, currentState, nextState) => {
   const authGuardService = new GuardService(new Router()); 
   return authGuardService.canDeactivate();
+
+  
 };
