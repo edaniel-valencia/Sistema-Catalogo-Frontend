@@ -18,9 +18,6 @@ export class UserService {
     
   }
 
-  signIn(user: User): Observable<any>{
-    return this.http.post(`${this.myAppUrl}${this.myAPIUrl}/register`, user);
-  }
   login(user: User): Observable<string>{
     return this.http.post<string>(`${this.myAppUrl}${this.myAPIUrl}/login`, user);
   }
@@ -32,7 +29,11 @@ export class UserService {
     return this.http.get<User[]>(`${this.myAppUrl}${this.myAPIUrl}/read`, {params});
   }
 
-  createUser(user: User): Observable<any> {
+  signIn(user: User): Observable<any>{
+    return this.http.post(`${this.myAppUrl}${this.myAPIUrl}/register`, user);
+  }
+
+  createUser(user: FormData): Observable<any> {
     return this.http.post(`${this.myAppUrl}${this.myAPIUrl}/create`, user);
   }
 

@@ -54,8 +54,6 @@ export class RoleComponent {
     this.readRole()
   }
 
-
-
   openModal(data: Role | null | undefined, modalId: number, modalType: 'Create' | 'Read' | 'Update' | 'Delete') {
     this.currentModalId = modalId;
     this.currentModalType = modalType;

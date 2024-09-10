@@ -3,8 +3,10 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Role } from 'src/app/interfaces/role';
 import { User } from 'src/app/interfaces/user';
 import { ErrorService } from 'src/app/services/error.service';
+import { RoleService } from 'src/app/services/role.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -16,6 +18,7 @@ export class UserComponent {
 
 
   listUser: User[] = []
+  listRole: Role[] = []
   id?: number;
   name?: string;
   lastname?: string;
@@ -25,6 +28,9 @@ export class UserComponent {
   status?: number;
   repeatUPassword?: string;
   ModalId?: number;
+
+  roleId?: number;
+
 
   loading: boolean = false;
 
@@ -42,6 +48,7 @@ export class UserComponent {
 
   constructor(
     private _userService: UserService,
+    private _roleService: RoleService,
     private toastr: ToastrService,
     private _errorService: ErrorService,
     private fb: FormBuilder
@@ -51,7 +58,9 @@ export class UserComponent {
       lastname: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
-      credential: ['', Validators.required]
+      credential: ['', Validators.required],
+      roleId: ['', Validators.required]
+
     })
     this.formUpdate = this.fb.group({
       name: ['', Validators.required],
@@ -59,12 +68,15 @@ export class UserComponent {
       email: ['', Validators.required],
       // password: ['', Validators.required],
       credential: ['', Validators.required],
-      status: ['', Validators.required]
+      status: ['', Validators.required],
+      roleId: ['', Validators.required]
+
       
     })
   }
 
   ngOnInit(): void {
+    this.readUser()
     this.readUser()
   }
 
@@ -98,6 +110,10 @@ export class UserComponent {
     return this.currentModalType === modalType;
   }
  
+  getRoleName(roleId: number): string {
+    const role = this.listRole.find(r => r.Rid === roleId);
+    return role?.Rname || 'Rol desconocida';
+  }
   readUser(page: number = 1): void {
     this.currentPage = page;
     this._userService.readUser().subscribe(data => {
@@ -108,6 +124,13 @@ export class UserComponent {
     });
   }
 
+  readRole() {
+    this._roleService.readRole().subscribe(data => {
+      this.listRole= data
+      console.log(data);
+    })
+  }
+ 
   updateItemRange(): void {
     this.startItem = (this.currentPage - 1) * this.itemsPerPage + 1;
     this.endItem = Math.min(this.currentPage * this.itemsPerPage, this.totalItems);
@@ -125,24 +148,43 @@ export class UserComponent {
   
   createUser() {
 
-    if (this.form.invalid) {
-      this.toastr.error('Por favor, llena todos los campos requeridos', 'Error');
-      return;
-    }
+    // if (this.form.invalid) {
+    //   this.toastr.error('Por favor, llena todos los campos requeridos', 'Error');
+    //   return;
+    // }
 
     const user: User = {
       Uname: this.form.value.name,
       Ulastname: this.form.value.lastname,
       Uemail: this.form.value.email,
       Upassword: this.form.value.password,
-      Ucredential: this.form.value.credential
+      Ucredential: this.form.value.credential,
+      RoleId: this.form.value.roleId,
+
     };
 
-    console.log(user);
-    
+
+// Crear un objeto FormData
+  const formData = new FormData();
+
+  // Agregar los datos del objeto User al FormData
+  formData.append('Uname', user.Uname!);
+  formData.append('Ulastname', user.Ulastname!);
+  formData.append('Uemail', user.Uemail!);
+  formData.append('Upassword', user.Upassword!);
+  formData.append('Ucredential', user.Ucredential!);
+  formData.append('RoleId', user.RoleId!.toString());
+
+  // Obtener la imagen seleccionada
+  const imageInput = (document.getElementById('user_avatar') as HTMLInputElement).files;
+  if (imageInput && imageInput.length > 0) {
+    formData.append('Uimagen', imageInput[0]); // 'Uimagen' es el nombre con el que el backend espera la imagen
+  }
+
+  console.log(user);    
 
     this.loading = true;
-    this._userService.createUser(user).subscribe({
+    this._userService.createUser(formData).subscribe({
       next: () => {
 
         this.loading = false;

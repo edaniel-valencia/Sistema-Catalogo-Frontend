@@ -5,8 +5,6 @@ export interface User{
     Uemail?: string,  
     Upassword?: string,  
     Ucredential?: string,
-    Uimagen?: string,
-    RoleId?: number,
     Ustatus?: number,
   }
 

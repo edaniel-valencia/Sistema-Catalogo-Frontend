@@ -87,9 +87,7 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  // openModalCreate(modalType: 'Create') {
-  //   this.currentModalType = modalType;
-  // }
+
 
   closeModal() {
     this.currentModalId = null;

@@ -1,4 +1,4 @@
-<div class="wrapper">
+<!-- <div class="wrapper">
     <div *ngIf="!loading" class="body">
         <img class="logo" src="../../../assets/logo.png" alt="" />
         <h1 class="mb-4 mt-3">Iniciar Sessión</h1>
@@ -35,3 +35,93 @@
     </div>
     <app-spinner *ngIf="loading"></app-spinner>
 </div>
+ -->
+
+
+
+
+<section class="bg-gray-200 dark:bg-gray-900 min-h-screen  min-h-screen flex">
+    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+            <img class="logo mr-2" src="../../../assets/logo.png" w alt="logo">
+        </a>
+        <div
+            class="formEdaniel w-full bg-white h-auto max-w-xl rounded-lg  shadow-lg dark:border   md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+
+                <h1
+                    class="mb-4 text-4xl font-extrabold leading-none tracking-tight dark:text-white md:max-w-2xl text-center">
+                    Crear una Cuenta</h1>
+
+                <form class="space-y-4 md:space-y-6" action="#">
+                    <div class="grid md:grid-cols-2 md:gap-6">
+                        <div class="block mb-2">
+                            <label for="Uname"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombres</label>
+                            <input [(ngModel)]="Uname" type="text" name="Uname" id="Uname"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="edaniel@tse.com" required="">
+                        </div>
+                        <div class="">
+                            <label for="Ulastname"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Apellidos</label>
+                            <input [(ngModel)]="Ulastname" type="text" name="Ulastname" id="Ulastname"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="edaniel@tse.com" required="">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="Ucredential" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Credencial</label>
+                        <input [(ngModel)]="Ucredential" type="text" name="Ucredential" id="Ucredential"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="edaniel@tse.com" required="">
+                    </div>
+                    <div>
+                        <label for="Uemail" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Electrónico</label>
+                        <input [(ngModel)]="Uemail" type="text" name="Uemail" id="Uemail"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="edaniel@tse.com" required="">
+                    </div>
+                    <div class="grid md:grid-cols-2 md:gap-6">
+
+                        <div class="block mb-2">
+                            <label for="Upassword"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contraseña</label>
+                            <input [(ngModel)]="Upassword" type="password" name="Upassword" id="Upassword"
+                                placeholder="******"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required="">
+                        </div>
+                        <div class="block mb-2">
+                            <label for="repeatUPassword"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contraseña</label>
+                            <input [(ngModel)]="repeatUPassword" type="password" name="repeatUPassword" id="repeatUPassword"
+                                placeholder="******"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required="">
+                        </div>
+                    </div>
+
+                    <button (click)="addUser()" type="submit"
+                        class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Registrarme</button>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-start">
+                            <div class="flex items-center h-">
+                                <p class="text-sm font-light text-right text-gray-500 dark:text-gray-400"> ¿Ya tengo cuenta? 
+                                    <a [routerLink]="['/login']"
+                                        class="font-medium text-primary-600 hover:underline dark:text-primary-500"> Iniciar Sesión </a>
+                                </p>
+                            </div>
+                        </div>
+                        <p class="text-sm font-light text-right text-gray-500 dark:text-gray-400">
+                            <a [routerLink]="['/home']"
+                                class="font-medium text-primary-600 hover:underline dark:text-primary-500">Home
+                            </a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
