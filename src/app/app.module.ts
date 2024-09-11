@@ -21,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { AddTokenInterceptor } from './utils/add-token.interceptor';
 import { SharedModule } from './shared/shared.module';  // Importa SharedModule
+import { PageComponent } from './page/page.component';
 @NgModule({
   declarations: [
     AppComponent,

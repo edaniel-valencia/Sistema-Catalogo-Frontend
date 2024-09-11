@@ -125,15 +125,55 @@ export class ProductComponent implements OnInit {
     this.endItem = Math.min(this.currentPage * this.itemsPerPage, this.totalItems);
   }
 
-  changePage(page: number): void {
-    this.readProduct(page);
+  changePage(page: number | string): void {
+    if (typeof page === 'number') {
+      this.readProduct(page);
+    }
   }
+  
+  // get totalPages(): number[] {
+  //   const pageCount = Math.ceil(this.totalItems / this.itemsPerPage);
+  //   return pageCount > 1 ? Array(pageCount).fill(0).map((_, i) => i + 1) : [];
+  // }
 
-  get totalPages(): number[] {
-    const pageCount = Math.ceil(this.totalItems / this.itemsPerPage);
-    return pageCount > 1 ? Array(pageCount).fill(0).map((_, i) => i + 1) : [];
+  get totalPages(): (number | string)[] {
+    const totalPagesCount = Math.ceil(this.totalItems / this.itemsPerPage);
+    const visiblePages: (number | string)[] = [];
+  
+    if (totalPagesCount <= 7) {
+      // Si hay menos de 7 páginas, muestra todas.
+      for (let i = 1; i <= totalPagesCount; i++) {
+        visiblePages.push(i);
+      }
+    } else {
+      // Siempre mostrar la primera página
+      visiblePages.push(1);
+  
+      if (this.currentPage > 4) {
+        // Mostrar "..." si la página actual está más allá de la cuarta página.
+        visiblePages.push('...');
+      }
+  
+      // Mostrar las 3 páginas alrededor de la página actual
+      const startPage = Math.max(2, this.currentPage - 1);
+      const endPage = Math.min(totalPagesCount - 1, this.currentPage + 1);
+  
+      for (let i = startPage; i <= endPage; i++) {
+        visiblePages.push(i);
+      }
+  
+      if (this.currentPage < totalPagesCount - 3) {
+        // Mostrar "..." si la página actual está antes de las últimas 3 páginas
+        visiblePages.push('...');
+      }
+  
+      // Siempre mostrar la última página
+      visiblePages.push(totalPagesCount);
+    }
+  
+    return visiblePages;
   }
-
+  
   
   createProduct() {
 

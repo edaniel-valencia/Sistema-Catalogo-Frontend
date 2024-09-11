@@ -5,9 +5,15 @@ import { SigInComponent } from './sig-in/sig-in.component';
 import { AuthGuard } from './utils/auth.guard';
 import { DashboardComponent } from './admin/dashboard.component';
 import { HomeComponent } from './admin/home/home.component';
+import { PageComponent } from './page/page.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '',
+    component: PageComponent, 
+    children:[
+      { path: '', loadChildren:() => import('./page/page.module').then(m => m.PageModule)}
+    ]
+  },
   {path: 'login', component: LoginComponent},
   {path: 'home', component: HomeComponent},
   {path: 'register', component: SigInComponent},
@@ -20,6 +26,7 @@ const routes: Routes = [
       // { path: 'category', loadChildren:() => import('./admin/dashboard.module').then(m => m.DashboardModule) }
     ]
   },
+ 
   {path: '**', redirectTo: '/login', pathMatch:'full'},
 ];
 
