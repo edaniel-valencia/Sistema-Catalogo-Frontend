@@ -7,13 +7,9 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SigInComponent } from './sig-in/sig-in.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
-import { MaintenanceComponent } from './components/maintenance/maintenance.component';
-import { ProductComponent } from './components/dashboard/product/product.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ErrorPageComponent } from './components/error-page/error-page.component';
 
 // TOAST CON ANIMACIONES
 import { CommonModule } from '@angular/common';
@@ -26,12 +22,8 @@ import { PageComponent } from './page/page.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent,
     SigInComponent,
     SpinnerComponent,
-    MaintenanceComponent,
-    ProductComponent,
-    ErrorPageComponent
   ],
   imports: [
     BrowserModule,

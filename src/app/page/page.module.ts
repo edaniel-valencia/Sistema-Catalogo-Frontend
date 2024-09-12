@@ -9,6 +9,12 @@ import { HomeComponent } from './home/home.component';
 import { PageComponent } from './page.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
+import { SharedComponent } from './shared/shared.component';
+import { ContactComponent } from './contact/contact.component';
+import { AboutComponent } from './about/about.component';
+import { TeamComponent } from './team/team.component';
+import { StoreComponent } from './store/store.component';
+import { ProductComponent } from './store/product/product.component';
 
 
 @NgModule({
@@ -16,7 +22,13 @@ import { HeaderComponent } from './header/header.component';
     PageComponent,
     HomeComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    SharedComponent,
+    ContactComponent,
+    AboutComponent,
+    TeamComponent,
+    StoreComponent,
+    ProductComponent
     ],
   imports: [
     ReactiveFormsModule,

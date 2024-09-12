@@ -14,8 +14,8 @@ const routes: Routes = [
       { path: '', loadChildren:() => import('./page/page.module').then(m => m.PageModule)}
     ]
   },
-  {path: 'login', component: LoginComponent},
   {path: 'home', component: HomeComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'register', component: SigInComponent},
   {path: 'dashboard', 
     // canActivate: [AuthGuard],     
