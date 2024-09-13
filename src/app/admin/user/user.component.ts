@@ -31,7 +31,6 @@ export class UserComponent {
 
   roleId?: number;
 
-
   loading: boolean = false;
 
   form: FormGroup;
