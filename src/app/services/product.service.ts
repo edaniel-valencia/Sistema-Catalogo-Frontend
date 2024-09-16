@@ -37,13 +37,37 @@ export class ProductService {
 
   }
 
+  readProductPublic(categoryId: number): Observable<Product[]> {
+  const params = new HttpParams().set('categoryId', categoryId.toString());
+  return this.http.get<Product[]>(`${this.myAppUrl}${this.myAPIUrl}/category/${categoryId}`, { params });
+}
 
-  createProduct(product: Product): Observable<any> {
-    return this.http.post(`${this.myAppUrl}${this.myAPIUrl}/create`, product);
+
+  createProduct(product: Product, file: File): Observable<any> {
+    const data = new FormData();
+    data.append('Pname', product.Pname || '');
+    data.append('Pdescription', product.Pdescription || '');
+    data.append('Pprice', product.Pprice!.toString()  );
+    if (file) {
+      data.append('Pimage', file, file.name);
+    }
+    data.append('CategoryId', product.CategoryId!.toString()  );
+    console.log(data);
+    
+    return this.http.post(`${this.myAppUrl}${this.myAPIUrl}/create`, data);
   }
 
-  updateProduct(product: Product): Observable<any> {    
-    return this.http.patch(`${this.myAppUrl}${this.myAPIUrl}/update/${product.Pid}`, product);
+  updateProduct(productId: number, product: Product,  file: File): Observable<any> {   
+    const data = new FormData();
+    data.append('Pname', product.Pname || '');
+    data.append('Pdescription', product.Pdescription || '');
+    data.append('Pprice', product.Pprice!.toString() );
+    if (file) {
+      data.append('Pimage', file, file.name);
+    } 
+    data.append('CategoryId', product.CategoryId!.toString()  );
+
+    return this.http.patch(`${this.myAppUrl}${this.myAPIUrl}/update/${productId}`, data);
   }
   
   deleteProduct(product: Product): Observable<any> {    

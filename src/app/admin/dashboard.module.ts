@@ -14,6 +14,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductComponent } from './product/product.component';
 import { SharedModule } from '../shared/shared.module';
+import { BannerComponent } from './banner/banner.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { SharedModule } from '../shared/shared.module';
     DashboardComponent,
     HomeComponent,
     UserComponent,
+    BannerComponent,
     ],
   imports: [
     ReactiveFormsModule,

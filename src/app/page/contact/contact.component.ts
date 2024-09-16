@@ -1,4 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Email } from 'src/app/interfaces/email';
 import { EmailService } from 'src/app/services/email.service';
 import { ErrorService } from 'src/app/services/error.service';
+import { environments } from 'src/environments/environment';
 
 @Component({
   selector: 'app-contact',
@@ -15,6 +16,7 @@ import { ErrorService } from 'src/app/services/error.service';
 
 export class ContactComponent {
 
+  title: string = "Contacto"
   name?: string;
   lastname?: string;
   whatssap?: string;
@@ -27,15 +29,21 @@ export class ContactComponent {
 
   loading: boolean = false;
 
+  private myAppUrl: string;
+  private myAPIUrl: string;
 
+ 
 
   constructor(
     private toastr: ToastrService,
     private _emailService: EmailService,
     private router: Router,
     private _errorService: ErrorService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private http: HttpClient
   ) {    
+    this.myAppUrl = environments.endpoint
+    this.myAPIUrl = 'api/category';
     this.form = this.fb.group({
       name: ['', Validators.required],
       lastname: ['', Validators.required],

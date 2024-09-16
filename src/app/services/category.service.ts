@@ -17,6 +17,21 @@ export class CategoryService {
     this.myAPIUrl = 'api/category';
   }
 
+  // createCategory(category: Category): Observable<any> {
+  //   return this.http.post(`${this.myAppUrl}${this.myAPIUrl}/create`, category);
+  // }
+
+  createCategory(category: Category, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('Cname', category.Cname || '');
+    formData.append('Cdescription', category.Cdescription || '');
+    if (file) {
+      formData.append('Cimage', file, file.name);
+    }
+
+    return this.http.post(`${this.myAppUrl}${this.myAPIUrl}/create`, formData);
+  }
+
   readCategory(page: number = 1, size: number = 10): Observable<Category[]> {
     const params = new HttpParams()
     .set('page', page.toString())
@@ -24,12 +39,21 @@ export class CategoryService {
     return this.http.get<Category[]>(`${this.myAppUrl}${this.myAPIUrl}/read`, {params});
   }
 
-  createCategory(category: Category): Observable<any> {
-    return this.http.post(`${this.myAppUrl}${this.myAPIUrl}/create`, category);
+  readCategoryPublic(): Observable<Category[]> {
+    const params = new HttpParams()
+    return this.http.get<Category[]>(`${this.myAppUrl}${this.myAPIUrl}/readPublicId`, {params});
   }
 
-  updateCategory(category: Category): Observable<any> {    
-    return this.http.patch(`${this.myAppUrl}${this.myAPIUrl}/update/${category.Cid}`, category);
+
+  updateCategory(categoryId: number, category: Category, file: File): Observable<any> {    
+    const formData = new FormData();
+    formData.append('Cname', category.Cname || '');
+    formData.append('Cdescription', category.Cdescription || '');
+    formData.append('Cstatus', category.Cstatus?.toString() || '0');
+    if (file) {
+      formData.append('Cimage', file, file.name);
+    }
+    return this.http.patch(`${this.myAppUrl}${this.myAPIUrl}/update/${categoryId}`, formData);
   }
   
   deleteCategory(category: Category): Observable<any> {    

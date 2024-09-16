@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    
     var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
     var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 

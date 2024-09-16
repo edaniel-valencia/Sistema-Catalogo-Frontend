@@ -14,7 +14,8 @@ import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
 import { TeamComponent } from './team/team.component';
 import { StoreComponent } from './store/store.component';
-import { ProductComponent } from './store/product/product.component';
+import { ProductComponent } from './product/product.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { ProductComponent } from './store/product/product.component';
     AboutComponent,
     TeamComponent,
     StoreComponent,
-    ProductComponent
+    ProductComponent,
+    ProductDetailComponent
     ],
   imports: [
     ReactiveFormsModule,

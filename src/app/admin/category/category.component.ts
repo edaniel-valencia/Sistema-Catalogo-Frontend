@@ -1,4 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Category } from 'src/app/interfaces/category';
 import { CategoryService } from 'src/app/services/category.service';
 import { ErrorService } from 'src/app/services/error.service';
+import { environments } from 'src/environments/environment';
 
 @Component({
   selector: 'app-category',
@@ -34,15 +35,27 @@ export class CategoryComponent implements OnInit {
 
   currentModalId: number | null = null;
   currentModalType:  'Create' | 'Read' | 'Update' | 'Delete' | null = null;
+  
+  photoSelected: string | ArrayBuffer | null = null;;
+  file: File | null = null;
 
+  
+  
+  myAppUrl: string = environments.endpoint;
+  myAPIUrl: string = 'static/image/';
+
+  baseUrl: string = this.myAppUrl+this.myAPIUrl; // Asegúrate de que esta URL sea correcta
 
   constructor(
     private _categoryService: CategoryService,
     private toastr: ToastrService,
     private router: Router,
     private _errorService: ErrorService,
-    private form: FormBuilder
+    private form: FormBuilder,
+
   ) {
+    
+   
     this.formCategory = this.form.group({
       name: ['', Validators.required],
       description: ['', Validators.required]
@@ -92,17 +105,42 @@ export class CategoryComponent implements OnInit {
   }
 
 
+  // readCategory(page: number = 1): void {
+  //   this.currentPage = page;
+  //   this._categoryService.readCategory(page, this.itemsPerPage).subscribe(data => {
+  //     this.totalItems = data.length;
+  //     this.listCategory = data.slice((page - 1) * this.itemsPerPage, page * this.itemsPerPage);
+  //   });
+  // }
+
   readCategory(page: number = 1): void {
     this.currentPage = page;
     this._categoryService.readCategory(page, this.itemsPerPage).subscribe(data => {
       this.totalItems = data.length;
       this.listCategory = data.slice((page - 1) * this.itemsPerPage, page * this.itemsPerPage);
+      console.log(data);
     });
+
+    
   }
 
   onPageChanged(page: number): void {
     this.readCategory(page);
   }
+
+
+  onPhotoSelected(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      this.file = <File>event.target.files[0];
+      // image preview
+      const reader = new FileReader();
+      reader.onload = e => this.photoSelected = reader.result;
+      reader.readAsDataURL(this.file);
+    }
+  }
+
+
+
 
   createCategory() {
 
@@ -116,14 +154,20 @@ export class CategoryComponent implements OnInit {
       Cdescription: this.formCategory.value.description,
     };
 
+    if (!this.file) {
+      this.toastr.error('Por favor, selecciona una imagen', 'Error');
+      return;
+    }
+  
     this.loading = true;
-    this._categoryService.createCategory(category).subscribe({
+    this._categoryService.createCategory(category, this.file).subscribe({
+      
       next: () => {
 
         this.loading = false;
 
         this.toastr.success(`Category ${category.Cname} fue registrado exitosamente`, 'Categoria Registrada');
-        this.router.navigate(['/admin/category/listCategory']);
+        // this.router.navigate(['/admin/category/listCategory']);
         this.readCategory()
         this.closeModal();
         this.formCategory.reset();
@@ -152,9 +196,10 @@ export class CategoryComponent implements OnInit {
       Cstatus: this.formCategoryUpdate.value.status
     };
 
+  
     this.loading = true;
 
-    this._categoryService.updateCategory(category).subscribe({
+    this._categoryService.updateCategory(categoryId, category, this.file!).subscribe({
       next: () => {
         this.loading = false;
         this.toastr.success(`Category ${category.Cname} fue actualizado exitosamente`, 'Categoria Actualizada');
@@ -182,7 +227,7 @@ export class CategoryComponent implements OnInit {
       next: (v) => {
         this.loading = false
         this.toastr.success(`Categoria ${this.name} fue eliminado exitosamente", "Categoria Eliminado`)
-        this.router.navigate(['/admin/category/listCategory'])
+        // this.router.navigate(['/admin/category/listCategory'])
         this.readCategory()
 
       },

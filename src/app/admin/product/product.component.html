@@ -11,8 +11,8 @@
             <label for="simple-search" class="sr-only">Search</label>
             <div class="relative w-full">
               <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <svg  class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
-                  viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd"
                     d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
                     clip-rule="evenodd" />
@@ -28,8 +28,8 @@
           class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
           <button type="button" (click)="openModal(null, undefined!, 'Create')"
             class="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
-            <svg class="w-6 h-6 text-gray-800 dark:text-white"  xmlns="http://www.w3.org/2000/svg"
-              width="24" height="24" fill="white" viewBox="2 0 24 24">
+            <svg class="w-6 h-6 text-gray-800 dark:text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              fill="white" viewBox="2 0 24 24">
               <path fill-rule="evenodd"
                 d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4.243a1 1 0 1 0-2 0V11H7.757a1 1 0 1 0 0 2H11v3.243a1 1 0 1 0 2 0V13h3.243a1 1 0 1 0 0-2H13V7.757Z"
                 clip-rule="evenodd" />
@@ -50,6 +50,7 @@
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" class="px-4 py-4">#</th>
+              <th scope="col" class="px-4 py-4">Imagen</th>
               <th scope="col" class="px-4 py-4">Productos</th>
               <th scope="col" class="px-4 py-3">Descripción</th>
               <th scope="col" class="px-4 py-4">Categorias</th>
@@ -60,12 +61,19 @@
           <tbody>
             <tr *ngFor="let product of listProduct" class="border-b dark:border-gray-700">
               <td class="px-4 py-3">{{ product.Pid }}</td>
-              <td scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white max-w-[12rem] truncate">
+              <th scope="row"
+              class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white w-[1rem] truncate">
+              <img *ngIf="product.Pimage" [src]="baseUrl + product.Pimage" class="w-full h-full object-contain rounded-lg"
+                alt="Preview Image">
+            </th>
+              <td scope="row"
+                class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white max-w-[12rem] truncate">
                 {{ product.Pname }}
-              </td>            
+              </td>
               <td class="px-4 py-3 max-w-[12rem] truncate">
                 {{ product.Pdescription }}
               </td>
+
               <td class="px-4 py-3 max-w-[12rem] truncate">
                 {{ getCategoryName(product.CategoryId!) }}
               </td>
@@ -84,8 +92,8 @@
               <td class=" max-w-[12rem] truncate">
                 <button type="button" (click)="openModal(product, product.Pid!, 'Read')"
                   class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                  <svg class="w-5 h-5 text-gray-100 dark:text-white" 
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                  <svg class="w-5 h-5 text-gray-100 dark:text-white" xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-width="2"
                       d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z" />
                     <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
@@ -93,16 +101,16 @@
                 </button>
                 <button type="button" (click)="openModal(product, product.Pid!, 'Update')"
                   class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-2 py-2 me-2 mb-2 dark:focus:ring-yellow-900">
-                  <svg class="w-5 h-5 text-gray-100 dark:text-white" 
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                  <svg class="w-5 h-5 text-gray-100 dark:text-white" xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
                   </svg>
                 </button>
                 <button type="button" (click)="openModal(product, product.Pid!, 'Delete')"
                   class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
-                  <svg class="w-5 h-5 text-gray-100 dark:text-white" 
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                  <svg class="w-5 h-5 text-gray-100 dark:text-white" xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
                   </svg>
@@ -124,14 +132,13 @@
           de
           <span class="font-semibold text-gray-900 dark:text-white">{{ totalItems }}</span>
         </span>
-        
+
         <ul class="inline-flex items-stretch -space-x-px">
           <li>
             <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1"
               class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
               <span class="sr-only">Previous</span>
-              <svg class="w-5 h-5"  fill="currentColor" viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"
                   d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
                   clip-rule="evenodd" />
@@ -139,8 +146,7 @@
             </button>
           </li>
           <li *ngFor="let page of totalPages">
-            <button *ngIf="page !== '...'; else dots"
-              (click)="changePage(page)"
+            <button *ngIf="page !== '...'; else dots" (click)="changePage(page)"
               [class]="page === currentPage ? 'z-10 py-2 px-3 leading-tight text-primary-600 bg-primary-50 border border-primary-300 dark:border-gray-700 dark:bg-gray-700 dark:text-white' : 'py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'">
               {{ page }}
             </button>
@@ -152,8 +158,7 @@
             <button (click)="changePage(currentPage + 1)" [disabled]="currentPage * itemsPerPage >= totalItems"
               class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
               <span class="sr-only">Next</span>
-              <svg class="w-5 h-5"  fill="currentColor" viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"
                   d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                   clip-rule="evenodd" />
@@ -170,7 +175,7 @@
 
 
 <ng-container *ngIf="isModalOpen('Create')">
-  <div id="createModal" tabindex="-1" 
+  <div id="createModal" tabindex="-1"
     class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80">
     <div class="relative p-4 w-full max-w-xl max-h-full">
       <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
@@ -181,8 +186,7 @@
           <div>
             <button type="button" (click)="closeModal()"
               class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 inline-flex dark:hover:bg-gray-600 dark:hover:text-white">
-              <svg  class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"
                   d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                   clip-rule="evenodd" />
@@ -193,8 +197,37 @@
         </div>
         <form [formGroup]="formProduct" (ngSubmit)="createProduct()">
           <div class="mb-4">
+            <div class="flex items-center justify-center w-full mb-4">
+              <label for="file-input"
+                class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                <div class="flex flex-col items-center justify-center pt-5 pb-6" *ngIf="!photoSelected">
+                  <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                  </svg>
+                  <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                    <span class="font-semibold">Haz clic para cargar una imagen</span>
+                  </p>
+                  <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG o GIF (MAX. 800x400px)</p>
+                </div>
+                <!-- Preview the image -->
+                <img *ngIf="photoSelected" [src]="photoSelected" class="w-full h-full object-contain rounded-lg"
+                  alt="Preview Image">
+                <!-- File Input -->
+                <input id="file-input" type="file" class="hidden" (change)="onPhotoSelected($event)"
+                  accept="image/png, image/jpeg, image/gif, image/svg+xml" />
+              </label>
+            </div>
+          </div>
+          <div class="mb-4">
             <label for="name" class="block text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
             <input id="name" formControlName="name" type="text"
+              class="mt-1 block w-full p-2 border border-gray-300 rounded-lg" />
+          </div>
+          <div class="mb-4">
+            <label for="price" class="block text-sm font-medium text-gray-900 dark:text-white">Precio</label>
+            <input id="price" formControlName="price" type="number"
               class="mt-1 block w-full p-2 border border-gray-300 rounded-lg" />
           </div>
           <div class="mb-4">
@@ -226,7 +259,7 @@
 <!-- Modal Mostrar Producto -->
 <ng-container *ngFor="let item of listProduct">
   <ng-container *ngIf="isModalOpen('Read') && currentModalId === item.Pid">
-    <div [id]="'ReadModal-' + item.Pid" tabindex="-1" 
+    <div [id]="'ReadModal-' + item.Pid" tabindex="-1"
       class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80">
       <div class="relative p-4 w-full max-w-xl max-h-full">
         <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
@@ -237,8 +270,7 @@
             <div>
               <button type="button" (click)="closeModal()"
                 class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 inline-flex dark:hover:bg-gray-600 dark:hover:text-white">
-                <svg  class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd"
                     d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                     clip-rule="evenodd" />
@@ -247,30 +279,42 @@
               </button>
             </div>
           </div>
-          <dl>
-            <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
-              {{item.Pname}}
-            </dt>
-            <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
-              {{item.Pdescription}}
-            </dd>
-            <dd class="mb-4 font-light text-gray-500 sm:mb-2 dark:text-gray-400">
-              <div class="flex mb-4 items-center">
-                <p [ngClass]="{
-                'h-2.5 w-2.5 rounded-full me-2': true,
-                'bg-green-500': item.Pstatus == 1,
-                'bg-red-500': item.Pstatus == 0
-              }"></p>
-                <span>{{ item.Pstatus == 1 ? 'Activo' : 'Inactivo' }}</span>
-              </div>
-            </dd>
+         
+          
 
-          </dl>
+          <div>
+
+            <ul class=" space-y-1">
+              <li>
+                <div
+                  class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+                  <div class="max-w-[12rem] object-contain rounded-lg">
+                    <img [src]="baseUrl + item.Pimage" alt="Preview Image">
+                  </div>
+                  <span class="flex-1 ms-3 whitespace-nowrap">{{item.Pname}}</span>
+                  <span
+                    class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
+                    <p [ngClass]="{
+                            'h-2.5 w-2.5 rounded-full me-2': true,
+                            'bg-green-500': item.Pstatus == 1,
+                            'bg-red-500': item.Pstatus == 0
+                          }"></p>{{ item.Pstatus == 1 ? 'Activo' : 'Inactivo' }}
+                  </span>
+                </div>
+              </li>
+            </ul>
+            <div>
+              <p class="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400 py-4 me-2">
+                {{item.Pdescription}}</p>
+            </div>
+          </div>
+
+
           <div class="flex justify-between items-center">
             <div class="flex items-center space-x-3 sm:space-x-4">
               <button type="button" (click)="openModal(item, item.Pid!, 'Update')"
                 class="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                <svg  class="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
+                <svg class="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg">
                   <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                   <path fill-rule="evenodd"
@@ -290,7 +334,7 @@
   <!-- Update modal -->
 
   <ng-container *ngIf="isModalOpen('Update') && currentModalId === item.Pid">
-    <div [id]="'UpdateModal-' + item.Pid" tabindex="-1" 
+    <div [id]="'UpdateModal-' + item.Pid" tabindex="-1"
       class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80">
       <div class="relative p-4 w-full max-w-2xl max-h-full bg-white rounded-lg shadow dark:bg-gray-800">
         <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
@@ -299,8 +343,7 @@
           </h3>
           <button type="button" (click)="closeModal()"
             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
-            <svg  class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd"
                 d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                 clip-rule="evenodd" />
@@ -311,11 +354,63 @@
         <form [formGroup]="formProductUpdate" (ngSubmit)="updateProduct(item.Pid!)">
           <div class="grid gap-4 mb-4 sm:grid-cols-1">
             <div>
+              <div class="flex items-center justify-center w-full mb-4">
+                <label for="file-input"
+                  class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+            
+                  <!-- Mostrar imagen desde base de datos si no hay ninguna nueva seleccionada -->
+                  <div *ngIf="!photoSelected" class="flex flex-col items-center justify-center h-full w-full">
+                    <div *ngIf="!item.Pimage" class="flex flex-col items-center justify-center pt-5 pb-6">
+                      <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                      </svg>
+                      <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                        <span class="font-semibold">Haz clic para cargar una imagen</span>
+                      </p>
+                      <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG o GIF (MAX. 800x400px)</p>
+                    </div>
+            
+                    <div *ngIf="item.Pimage" class="w-full h-full flex items-center justify-center">
+                      <img *ngIf="item.Pimage" [src]="baseUrl + item.Pimage"
+                        class="max-w-full max-h-full object-contain rounded-lg" alt="Preview Image">
+                    </div>
+                  </div>
+            
+                  <!-- Mostrar la nueva imagen seleccionada si existe -->
+                  <img *ngIf="photoSelected" [src]="photoSelected"
+                    class="max-w-full max-h-full object-contain rounded-lg" alt="Preview Image">
+            
+                  <!-- Input para seleccionar una nueva imagen -->
+                  <input id="file-input" type="file" class="hidden" (change)="onPhotoSelected($event)"
+                    accept="image/png, image/jpeg, image/gif, image/svg+xml" />
+                </label>
+              </div>
+            </div>
+            
+            <div>
+              <div class="relative">
+                <label for="countries"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estado</label>
+                <select id="countries" formControlName="categoryId"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <option value="">{{ getCategoryName(categoryId!)}}</option>
+                  <option *ngFor="let category of listCategory" value="{{category.Cid}}">{{category.Cname}}</option>
+                </select>
+              </div>
+            </div>
+            <div>
               <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Nombre
               </label>
               <input type="text" id="name" formControlName="name"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+            </div>
+            <div class="mb-4">
+              <label for="price" class="block text-sm font-medium text-gray-900 dark:text-white">Precio</label>
+              <input id="price" formControlName="price" type="number"
+                class="mt-1 block w-full p-2 border border-gray-300 rounded-lg" />
             </div>
             <div>
               <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -358,22 +453,21 @@
   <!-- Modal Eliminar Producto -->
   <!-- Delete modal -->
   <ng-container *ngIf="isModalOpen('Delete') && currentModalId === item.Pid">
-    <div [id]="'DeleteModal-' + item.Pid" tabindex="-1" 
+    <div [id]="'DeleteModal-' + item.Pid" tabindex="-1"
       class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80">
       <div class="relative p-4 w-full max-w-md max-h-full">
         <div class="relative p-4 text-center bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
           <button type="button" (click)="closeModal()"
             class="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
-            <svg  class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg">
+            <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd"
                 d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                 clip-rule="evenodd" />
             </svg>
             <span class="sr-only">Close modal</span>
           </button>
-          <svg class="text-gray-400 dark:text-gray-500 w-11 h-11 mb-3.5 mx-auto"  fill="currentColor"
-            viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <svg class="text-gray-400 dark:text-gray-500 w-11 h-11 mb-3.5 mx-auto" fill="currentColor" viewbox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd"
               d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
               clip-rule="evenodd" />

@@ -17,6 +17,7 @@ export class AuthService {
     this.myAPIUrl = 'api/auth';
     
   }
+  
 
   login(user: User): Observable<string>{
     return this.http.post<string>(`${this.myAppUrl}${this.myAPIUrl}/login`, user);

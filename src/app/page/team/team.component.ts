@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class TeamComponent {
 
+  title: string = "Equipo"
 }

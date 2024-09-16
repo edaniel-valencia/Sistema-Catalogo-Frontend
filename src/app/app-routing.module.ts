@@ -8,26 +8,20 @@ import { HomeComponent } from './admin/home/home.component';
 import { PageComponent } from './page/page.component';
 
 const routes: Routes = [
-  {path: '',
-    component: PageComponent, 
-    children:[
-      { path: '', loadChildren:() => import('./page/page.module').then(m => m.PageModule)}
-    ]
-  },
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: SigInComponent},
-  {path: 'dashboard', 
-    // canActivate: [AuthGuard],     
-    component: DashboardComponent, 
-    children:[
-      { path: '', loadChildren:() => import('./admin/dashboard.module').then(m => m.DashboardModule)},
-      // { path: 'product', loadChildren:() => import('./admin/dashboard.module').then(m => m.DashboardModule) },
-      // { path: 'category', loadChildren:() => import('./admin/dashboard.module').then(m => m.DashboardModule) }
-    ]
+  
+  
+  {path: '', component: PageComponent, 
+    children:[ { path: '', loadChildren:() => import('./page/page.module').then(m => m.PageModule)} ]
   },
  
-  {path: '**', redirectTo: '/login', pathMatch:'full'},
+  {path: 'dashboard', component: DashboardComponent, 
+    children:[ { path: '', loadChildren:() => import('./admin/dashboard.module').then(m => m.DashboardModule)} ]
+  },
+ 
+  {path: '**', redirectTo: '/', pathMatch:'full'},
 ];
 
 @NgModule({

@@ -9,6 +9,7 @@ import { Product } from 'src/app/interfaces/product';
 import { CategoryService } from 'src/app/services/category.service';
 import { ErrorService } from 'src/app/services/error.service';
 import { ProductService } from 'src/app/services/product.service';
+import { environments } from 'src/environments/environment';
 
 @Component({
   selector: 'app-product',
@@ -24,6 +25,7 @@ export class ProductComponent implements OnInit {
   name?: string;
   description?: string;
   categoryId?: number;
+  price?: number;
   status?: number;
   ModalId?: number;
 
@@ -35,6 +37,13 @@ export class ProductComponent implements OnInit {
   currentModalId: number | null = null;
   currentModalType:  'Create' | 'Read' | 'Update' | 'Delete' | null = null;
 
+  photoSelected: string | ArrayBuffer | null = null;;
+  file: File | null = null;
+
+  myAppUrl: string = environments.endpoint;
+  myAPIUrl: string = 'static/product/';
+
+  baseUrl: string = this.myAppUrl+this.myAPIUrl; // Asegúrate de que esta URL sea correcta
 
   // Variables de paginación
   totalItems: number = 0; // Este valor debería venir del backend
@@ -54,11 +63,13 @@ export class ProductComponent implements OnInit {
     this.formProduct = this.form.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
+      price: ['', Validators.required],
       categoryId: ['', Validators.required]
     })
     this.formProductUpdate = this.form.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
+      price: ['', Validators.required],
       categoryId: ['', Validators.required],
       status: ['', Validators.required]
     })
@@ -78,7 +89,9 @@ export class ProductComponent implements OnInit {
       this.formProductUpdate.patchValue({
         name: data.Pname,
         description: data.Pdescription,
+        price: data.Pprice,
         status: data.Pstatus,
+        categoryID: data.CategoryId
       });
       this.ModalId = data.Pid;
     } else {
@@ -101,7 +114,7 @@ export class ProductComponent implements OnInit {
 
   getCategoryName(categoryId: number): string {
     const category = this.listCategory.find(c => c.Cid === categoryId);
-    return category?.Cname || 'Categoría desconocida';
+    return category?.Cname || 'Seleccionar Categoria';
   }
 
   readCategory() {
@@ -135,6 +148,19 @@ export class ProductComponent implements OnInit {
   //   const pageCount = Math.ceil(this.totalItems / this.itemsPerPage);
   //   return pageCount > 1 ? Array(pageCount).fill(0).map((_, i) => i + 1) : [];
   // }
+
+
+  onPhotoSelected(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      this.file = <File>event.target.files[0];
+      // image preview
+      const reader = new FileReader();
+      reader.onload = e => this.photoSelected = reader.result;
+      reader.readAsDataURL(this.file);
+    }
+  }
+
+
 
   get totalPages(): (number | string)[] {
     const totalPagesCount = Math.ceil(this.totalItems / this.itemsPerPage);
@@ -185,14 +211,19 @@ export class ProductComponent implements OnInit {
     const product: Product = {
       Pname: this.formProduct.value.name,
       Pdescription: this.formProduct.value.description,
+      Pprice: this.formProduct.value.price,
       CategoryId: this.formProduct.value.categoryId,
     };
 
     console.log(product);
-    
+
+    if (!this.file) {
+      this.toastr.error('Por favor, selecciona una imagen', 'Error');
+      return;
+    }
 
     this.loading = true;
-    this._productService.createProduct(product).subscribe({
+    this._productService.createProduct(product, this.file).subscribe({
       next: () => {
 
         this.loading = false;
@@ -213,23 +244,28 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  updateProduct(ProductId: number) {
+  updateProduct(productId: number) {
 
-    if (this.formProductUpdate.invalid) {
-      this.toastr.error('Por favor, llena todos los campos requeridos', 'Error');
-      return;
-    }
+    // if (this.formProductUpdate.invalid) {
+    //   this.toastr.error('Por favor, llena todos los campos requeridos', 'Error');
+    //   return;
+    // }
 
     const product: Product = {
-      Pid: ProductId,
+      Pid: productId,
       Pname: this.formProductUpdate.value.name,
       Pdescription: this.formProductUpdate.value.description,
-      Pstatus: this.formProductUpdate.value.status
+      Pprice: this.formProductUpdate.value.price,
+      Pstatus: this.formProductUpdate.value.status,
+      CategoryId: this.formProductUpdate.value.categoryId,
+
     };
 
+   console.log(product);
+   
     this.loading = true;
 
-    this._productService.updateProduct(product).subscribe({
+    this._productService.updateProduct(productId, product, this.file!).subscribe({
       next: () => {
         this.loading = false;
         this.toastr.success(`Product ${product.Pname} fue actualizado exitosamente`, 'Categoria Actualizada');

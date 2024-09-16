@@ -2,26 +2,9 @@
   <section class="antialiased">
     <div class="mx-auto">
       <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden p-6">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white ">Gestión de Categorias</h5>
-
         <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
           <div class="w-full md:w-1/2">
-            <form class="flex items-center">
-              <label for="simple-search" class="sr-only">Search</label>
-              <div class="relative w-full">
-                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                      clip-rule="evenodd" />
-                  </svg>
-                </div>
-                <input type="text" id="simple-search"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Search" required="" />
-              </div>
-            </form>
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white ">Gestión de Banners</h5>
           </div>
           <div
             class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
@@ -33,58 +16,31 @@
                   d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4.243a1 1 0 1 0-2 0V11H7.757a1 1 0 1 0 0 2H11v3.243a1 1 0 1 0 2 0V13h3.243a1 1 0 1 0 0-2H13V7.757Z"
                   clip-rule="evenodd" />
               </svg>
-              Nuevo Categoria
+              Nuevo Banner
             </button>
-
-
           </div>
         </div>
-        <app-pagination [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"
-          (pageChanged)="onPageChanged($event)">
-        </app-pagination>
+
         <div class="overflow-x-auto">
-          <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-              <tr>
-                <th scope="col" class="px-4 py-4">#</th>
-                <th scope="col" class="px-4 py-3">Imagen</th>
-                <th scope="col" class="px-4 py-3">Categoria</th>
-                <th scope="col" class="px-4 py-3">Descriptión</th>
-                <th scope="col" class="px-4 py-3">Estado</th>
-                <th scope="col" class="px-4 py-3">Opciones<span class="sr-only">Opciones</span></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of listCategory" class="border-b dark:border-gray-700">
-                <td class="px-4 py-3">{{ item.Cid }}</td>
-                <th scope="row"
-                  class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white w-[1rem] truncate">
-                  <img *ngIf="item.Cimage" [src]="baseUrl + item.Cimage" class="w-full h-full object-contain rounded-lg"
-                    alt="Preview Image">
-                </th>
-                <th scope="row"
-                  class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white max-w-[12rem] truncate">
-                  {{ item.Cname }}
-                </th>
+          <div class="mb-3 grid gap-3 sm:grid-cols-3 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">
+            <div *ngFor="let item of listBanner"
+              class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+              <a href="#">
+                <img class="rounded-t-lg" *ngIf="item.Bimage" [src]="baseUrl + item.Bimage" alt="" />
+              </a>
+              <div class="p-5 flex flex-col items-center justify-center">                 
+                  <h5 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{item.Bdescription}}</h5>               
+                <div class="flex items-center mb-3">
+                  <div [ngClass]="{
+                        'h-2.5 w-2.5 rounded-full me-2': true,
+                        'bg-green-500': item.Bstatus == 1,
+                        'bg-red-500': item.Bstatus == 0
+                      }"></div>
+                  <span class="text-gray-400">{{ item.Bstatus == 1 ? 'Activo' : 'Inactivo' }}</span>
 
-                <td class="px-4 py-3 max-w-[12rem] truncate">
-                  {{ item.Cdescription }}
-                </td>
-
-                <td class="px-6 py-4">
-                  <div class="flex items-center">
-                    <div [ngClass]="{
-                      'h-2.5 w-2.5 rounded-full me-2': true,
-                      'bg-green-500': item.Cstatus == 1,
-                      'bg-red-500': item.Cstatus == 0
-                    }"></div>
-                    <span>{{ item.Cstatus == 1 ? 'Activo' : 'Inactivo' }}</span>
-
-                  </div>
-                </td>
-
-                <td class=" max-w-[12rem] truncate">
-                  <button type="button" (click)="openModal(item, item.Cid!, 'Read')"
+                </div>
+                <div class=" max-w-[12rem] truncate">
+                  <button type="button" (click)="openModal(item, item.Bid!, 'Read')"
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                     <svg class="w-5 h-5 text-gray-100 dark:text-white" xmlns="http://www.w3.org/2000/svg" width="24"
                       height="24" fill="none" viewBox="0 0 24 24">
@@ -93,7 +49,7 @@
                       <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                     </svg>
                   </button>
-                  <button type="button" (click)="openModal(item, item.Cid!, 'Update')"
+                  <button type="button" (click)="openModal(item, item.Bid!, 'Update')"
                     class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-2 py-2 me-2 mb-2 dark:focus:ring-yellow-900">
                     <svg class="w-5 h-5 text-gray-100 dark:text-white" xmlns="http://www.w3.org/2000/svg" width="24"
                       height="24" fill="none" viewBox="0 0 24 24">
@@ -101,7 +57,7 @@
                         d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
                     </svg>
                   </button>
-                  <button type="button" (click)="openModal(item, item.Cid!, 'Delete')"
+                  <button type="button" (click)="openModal(item, item.Bid!, 'Delete')"
                     class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
                     <svg class="w-5 h-5 text-gray-100 dark:text-white" xmlns="http://www.w3.org/2000/svg" width="24"
                       height="24" fill="none" viewBox="0 0 24 24">
@@ -109,15 +65,12 @@
                         d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
                     </svg>
                   </button>
-                </td>
-
-              </tr>
-            </tbody>
-          </table>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <app-pagination [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"
-          (pageChanged)="onPageChanged($event)">
-        </app-pagination>
+
       </div>
     </div>
   </section>
@@ -129,7 +82,7 @@
         <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
           <div class="flex justify-between mb-4 rounded-t sm:mb-5">
             <div class="text-lg text-gray-900 md:text-xl dark:text-white">
-              <h3 class="font-semibold">Nuevo Categoria</h3>
+              <h3 class="font-semibold">Nuevo Banner</h3>
             </div>
             <div>
               <button type="button" (click)="closeModal()"
@@ -143,7 +96,7 @@
               </button>
             </div>
           </div>
-          <form [formGroup]="formCategory" (ngSubmit)="createCategory()">
+          <form [formGroup]="formBanner" (ngSubmit)="createBanner()">
 
             <div class="mb-4">
               <div class="flex items-center justify-center w-full mb-4">
@@ -168,12 +121,7 @@
                     accept="image/png, image/jpeg, image/gif, image/svg+xml" />
                 </label>
               </div>
-            </div>
-            <div class="mb-4">
-              <label for="name" class="block text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
-              <input id="name" formControlName="name" type="text"
-                class="mt-1 block w-full p-2 border border-gray-300 rounded-lg" />
-            </div>
+            </div>           
             <div class="mb-4">
               <label for="description"
                 class="block text-sm font-medium text-gray-900 dark:text-white">Descripción</label>
@@ -193,16 +141,16 @@
   </ng-container>
 
 
-  <!-- Modal Mostrar Categoria -->
-  <ng-container *ngFor="let item of listCategory">
-    <ng-container *ngIf="isModalOpen('Read') && currentModalId === item.Cid">
-      <div [id]="'ReadModal-' + item.Cid" tabindex="-1"
+  <!-- Modal Mostrar Banner -->
+  <ng-container *ngFor="let item of listBanner">
+    <ng-container *ngIf="isModalOpen('Read') && currentModalId === item.Bid">
+      <div [id]="'ReadModal-' + item.Bid" tabindex="-1"
         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80">
         <div class="relative p-4 w-full max-w-xl max-h-full">
           <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
             <div class="flex justify-between mb-4 rounded-t sm:mb-5">
               <div class="text-lg text-gray-900 md:text-xl dark:text-white">
-                <h3 class="font-semibold">Detalle del Categoria</h3>
+                <h3 class="font-semibold">Detalle del Banner</h3>
               </div>
               <div>
                 <button type="button" (click)="closeModal()"
@@ -220,58 +168,32 @@
 
             <!-- Modal body -->
             <div>
-
+              <div class=" object-contain rounded-lg">
+                <img [src]="baseUrl + item.Bimage" alt="Preview Image">
+              </div>
               <ul class=" space-y-1">
                 <li>
                   <div
                     class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-                    <div class="max-w-[12rem] object-contain rounded-lg">
-                      <img [src]="baseUrl + item.Cimage" alt="Preview Image">
-                    </div>
-                    <span class="flex-1 ms-3 whitespace-nowrap">{{item.Cname}}</span>
+                    
+                    <span class="flex-1 ms-3 whitespace-nowrap">    {{item.Bdescription}}</span>
                     <span
                       class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
                       <p [ngClass]="{
-                              'h-2.5 w-2.5 rounded-full me-2': true,
-                              'bg-green-500': item.Cstatus == 1,
-                              'bg-red-500': item.Cstatus == 0
-                            }"></p>{{ item.Cstatus == 1 ? 'Activo' : 'Inactivo' }}
+                                'h-2.5 w-2.5 rounded-full me-2': true,
+                                'bg-green-500': item.Bstatus == 1,
+                                'bg-red-500': item.Bstatus == 0
+                              }"></p>{{ item.Bstatus == 1 ? 'Activo' : 'Inactivo' }}
                     </span>
                   </div>
                 </li>
               </ul>
-              <div>
-                <p class="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400 py-4 me-2">
-                  {{item.Cdescription}}</p>
-              </div>
+             <br>
             </div>
-            <!-- <dl >
-              
-              <dt *ngIf="item.Cimage" class=" max-w-[1rem]">
-                <img [src]="baseUrl + item.Cimage" class="max-h-full object-contain rounded-lg "
-                  alt="Preview Image">
-              </dt>
-              <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
-                {{item.Cname}}
-              </dt>
-              <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
-                {{item.Cdescription}}
-              </dd>
-              <dd class="mb-4 font-light text-gray-500 sm:mb-2 dark:text-gray-400">
-                <div class="flex mb-4 items-center">
-                  <p [ngClass]="{
-                  'h-2.5 w-2.5 rounded-full me-2': true,
-                  'bg-green-500': item.Cstatus == 1,
-                  'bg-red-500': item.Cstatus == 0
-                }"></p>
-                  <span>{{ item.Cstatus == 1 ? 'Activo' : 'Inactivo' }}</span>
-                </div>
-              </dd>
-
-            </dl> -->
+          
             <div class="flex justify-between items-center">
               <div class="flex items-center space-x-3 sm:space-x-4">
-                <button type="button" (click)="openModal(item, item.Cid!, 'Update')"
+                <button type="button" (click)="openModal(item, item.Bid!, 'Update')"
                   class="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                   <svg class="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg">
@@ -280,7 +202,7 @@
                       d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
                       clip-rule="evenodd" />
                   </svg>
-                  Actualizar Categoria
+                  Actualizar Banner
                 </button>
               </div>
             </div>
@@ -292,13 +214,13 @@
 
     <!-- Update modal -->
 
-    <ng-container *ngIf="isModalOpen('Update') && currentModalId === item.Cid">
-      <div [id]="'UpdateModal-' + item.Cid" tabindex="-1"
+    <ng-container *ngIf="isModalOpen('Update') && currentModalId === item.Bid">
+      <div [id]="'UpdateModal-' + item.Bid" tabindex="-1"
         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80">
         <div class="relative p-4 w-full max-w-2xl max-h-full bg-white rounded-lg shadow dark:bg-gray-800">
           <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
             <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-              Actualizar Categoria
+              Actualizar Banner
             </h3>
             <button type="button" (click)="closeModal()"
               class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
@@ -310,18 +232,17 @@
               <span class="sr-only">Close modal</span>
             </button>
           </div>
-          <form [formGroup]="formCategoryUpdate" (ngSubmit)="updateCategory(item.Cid!)">
+          <form [formGroup]="formBannerUpdate" (ngSubmit)="updateBanner(item.Bid!)">
             <div class="grid gap-4 mb-4 sm:grid-cols-1">
 
               <div>
                 <div class="flex items-center justify-center w-full mb-4">
                   <label for="file-input"
                     class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-
+              
                     <!-- Mostrar imagen desde base de datos si no hay ninguna nueva seleccionada -->
-
-                    <div *ngIf="!photoSelected" class="flex flex-col items-center justify-center pt-5 pb-6">
-                      <div *ngIf="!item.Cimage" class="flex flex-col items-center justify-center pt-5 pb-6">
+                    <div *ngIf="!photoSelected" class="flex flex-col items-center justify-center h-full w-full">
+                      <div *ngIf="!item.Bimage" class="flex flex-col items-center justify-center pt-5 pb-6">
                         <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                           xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -332,34 +253,25 @@
                         </p>
                         <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG o GIF (MAX. 800x400px)</p>
                       </div>
-
-
-                      <div *ngIf="item.Cimage" class=" max-w-[12rem]">
-                        <img [src]="baseUrl + item.Cimage" class="w-full h-full object-contain rounded-lg "
-                          alt="Preview Image">
+              
+                      <div *ngIf="item.Bimage" class="w-full h-full flex items-center justify-center">
+                        <img *ngIf="item.Bimage" [src]="baseUrl + item.Bimage"
+                          class="max-w-full max-h-full object-contain rounded-lg" alt="Preview Image">
                       </div>
                     </div>
-
+              
                     <!-- Mostrar la nueva imagen seleccionada si existe -->
-                    <img *ngIf="photoSelected" [src]="photoSelected" class="w-full h-full object-contain rounded-lg"
-                      alt="Preview Image">
-
+                    <img *ngIf="photoSelected" [src]="photoSelected"
+                      class="max-w-full max-h-full object-contain rounded-lg" alt="Preview Image">
+              
                     <!-- Input para seleccionar una nueva imagen -->
                     <input id="file-input" type="file" class="hidden" (change)="onPhotoSelected($event)"
                       accept="image/png, image/jpeg, image/gif, image/svg+xml" />
-
                   </label>
                 </div>
               </div>
-              <div>
-                <div class="relative">
-                  <input type="text" id="name" formControlName="name"
-                    class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                    placeholder=" " />
-                  <label for="name"
-                    class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">Nombre</label>
-                </div>
-              </div>
+              
+            
               <div>
                 <div class="relative">
                   <textarea type="text" id="description" formControlName="description"
@@ -376,10 +288,10 @@
                 <select id="countries" formControlName="status"
                   class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                   <option [ngClass]="{
-                    'h-2.5 w-2.5 rounded-full me-2': true,
-                    'bg-green-500': item.Cstatus == 1,
-                    'bg-red-500': item.Cstatus == 0
-                  }" value="{{item.Cstatus}}">Estado {{ item.Cstatus == 1 ? 'Activo' : 'Inactivo' }}</option>
+                      'h-2.5 w-2.5 rounded-full me-2': true,
+                      'bg-green-500': item.Bstatus == 1,
+                      'bg-red-500': item.Bstatus == 0
+                    }" value="{{item.Bstatus}}">Estado {{ item.Bstatus == 1 ? 'Activo' : 'Inactivo' }}</option>
                   <option value="1">Activo</option>
                   <option value="0">Inactivo</option>
                 </select>
@@ -388,7 +300,7 @@
                 <div class="items-center text-center">
                   <button type="submit"
                     class="tems-center text-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                    Actualizar Categoria
+                    Actualizar Banner
                   </button>
                 </div>
               </div>
@@ -402,10 +314,10 @@
 
 
 
-    <!-- Modal Eliminar Categoria -->
+    <!-- Modal Eliminar Banner -->
     <!-- Delete modal -->
-    <ng-container *ngIf="isModalOpen('Delete') && currentModalId === item.Cid">
-      <div [id]="'DeleteModal-' + item.Cid" tabindex="-1"
+    <ng-container *ngIf="isModalOpen('Delete') && currentModalId === item.Bid">
+      <div [id]="'DeleteModal-' + item.Bid" tabindex="-1"
         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80">
         <div class="relative p-4 w-full max-w-md max-h-full">
           <div class="relative p-4 text-center bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
@@ -426,13 +338,13 @@
             </svg>
             <p class="mb-4 text-gray-500 dark:text-gray-300">
               Vas a eliminar el registo<br>
-              ID: <b>{{item.Cid}}</b><br>
-              Nombre:<b>{{item.Cname}}</b>
+              ID: <b>{{item.Bid}}</b><br>
+              Nombre:<b>banner</b>
 
             </p>
             <div class="flex justify-center items-center space-x-4">
 
-              <button type="submit" (click)="deleteCategory(item.Cid!)"
+              <button type="submit" (click)="deleteBanner(item.Bid!)"
                 class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
                 Eliminar Registro
               </button>

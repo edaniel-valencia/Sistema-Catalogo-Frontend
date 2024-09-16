@@ -6,6 +6,7 @@ import { User } from 'src/app/interfaces/user';
 import { ErrorService } from 'src/app/services/error.service';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from '../services/auth.service';
+import { GuardService } from '../services/guard.service';
 
 @Component({
   selector: 'app-login',
@@ -20,13 +21,19 @@ export class LoginComponent  implements OnInit{
 
   constructor(
     private toastr: ToastrService,
-    // private _userService:  UserService,
+    private _guardService:  GuardService,
     private _authService:  AuthService,
     private router: Router,
     private _errorService: ErrorService
   ){}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this._guardService.canDeactivate()) {
+      this.router.navigate(['/dashboard/categories']);
+    }else{
+      this.router.navigate(['/login']);
+    }
+  }
 
   loginUser(){
     if (this.Uemail == '' || this.Upassword == '') {

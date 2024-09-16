@@ -1,69 +1,104 @@
-<section class="py-16 px-4  bg-white md:py-16 dark:bg-gray-900 antialiased">
-    <div class="max-w-screen-xl py-8 px-4 mx-auto 2xl:px-0">
-        <div class="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
-            <div class="shrink-0 max-w-md lg:max-w-lg mx-auto">
-                <img class="w-full dark:hidden"
-                    src="https://img.freepik.com/vector-premium/conjunto-ilustraciones-3d-gestion-tiempo-caracter-usando-recordatorio-notificacion-seguimiento-tiempo_808510-1476.jpg"
-                    alt="" />
-                <img class="w-full hidden dark:block"
-                    src="https://img.freepik.com/vector-premium/conjunto-ilustraciones-3d-gestion-tiempo-caracter-usando-recordatorio-notificacion-seguimiento-tiempo_808510-1476.jpg"
-                    alt="" />
+<section class="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-12">
+    <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
+        <!-- Heading & Filters -->
+        <div class="mb-4 items-end justify-between space-y-4 sm:flex sm:space-y-0 md:mb-8">
+            <div>
+                <nav class="flex" aria-label="Breadcrumb">
+                    <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                        <li class="inline-flex items-center">
+                            <a routerLink="/"
+                                class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-400 dark:hover:text-white">
+                                <svg class="me-2.5 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
+                                </svg>
+                                Inicio
+                            </a>
+                        </li>
+                        <li aria-current="page">
+                            <div class="flex items-center">
+                                <svg class="h-5 w-5 text-gray-400 rtl:rotate-180" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                    viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m9 5 7 7-7 7" />
+                                </svg>
+                                <span class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400 md:ms-2">{{ title
+                                    }}</span>
+                            </div>
+                        </li>
+                    </ol>
+                </nav>
             </div>
+        </div>
+        <div class="max-w-screen-xl py-8 px-4 mx-auto 2xl:px-0">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
+                <div class="shrink-0 max-w-md lg:max-w-lg mx-auto">
+                    <img class="w-full dark:hidden"
+                        src="https://img.freepik.com/vector-premium/conjunto-ilustraciones-3d-gestion-tiempo-caracter-usando-recordatorio-notificacion-seguimiento-tiempo_808510-1476.jpg"
+                        alt="" />
+                    <img class="w-full hidden dark:block"
+                        src="https://img.freepik.com/vector-premium/conjunto-ilustraciones-3d-gestion-tiempo-caracter-usando-recordatorio-notificacion-seguimiento-tiempo_808510-1476.jpg"
+                        alt="" />
+                </div>
 
-            <div class="mt-4 sm:mt-8 lg:mt-0">
-                <div
-                    class="formEdaniel w-full bg-white h-auto max-w-xl rounded-lg  shadow-lg dark:border   md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-                    <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                <div class="mt-4 sm:mt-8 lg:mt-0">
+                    <div
+                        class="formEdaniel w-full bg-white h-auto max-w-xl rounded-lg  shadow-lg dark:border   md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                        <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
 
-                        <h1
-                            class="mb-4 text-4xl font-extrabold leading-none tracking-tight dark:text-white md:max-w-2xl text-center">
-                            Enviame un mensaje</h1>
+                            <h1
+                                class="mb-4 text-4xl font-extrabold leading-none tracking-tight dark:text-white md:max-w-2xl text-center">
+                                Enviame un mensaje</h1>
                             <!-- <form [formGroup]="form" (ngSubmit)="createUser()"> -->
 
-                        <form class="space-y-4 md:space-y-6"  [formGroup]="form" (ngSubmit)="sendEmail()">
-                            <div class="grid md:grid-cols-2 md:gap-6">
-                                <div class="">
+                            <form class="space-y-4 md:space-y-6" [formGroup]="form" (ngSubmit)="sendEmail()">
+                                <div class="grid md:grid-cols-2 md:gap-6">
+                                    <div class="mb-2">
+                                        <input formControlName="name" type="text" name="name" id="name"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            placeholder="Nombre" required="">
+                                    </div>
+                                    <div class="">
 
-                                    <input  formControlName="name" type="text" name="name" id="name"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="Nombre" required="">
+                                        <input formControlName="lastname" type="text" name="lastname" id="lastname"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            placeholder="Apellidos" required="">
+                                    </div>
                                 </div>
-                                <div class="">
 
-                                    <input formControlName="lastname" type="text" name="lastname" id="lastname"
+                                <div>
+
+                                    <input formControlName="whatssap" type="text" name="whatssap" id="whatssap"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="Apellidos" required="">
+                                        placeholder="Whatssap" required="">
                                 </div>
-                            </div>
+                                <div>
 
-                            <div>
-
-                                <input  formControlName="whatssap" type="text" name="whatssap" id="whatssap"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Whatssap" required="">
-                            </div>
-                            <div>
-
-                                <input formControlName="email"  type="text" name="email" id="email"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Correo electrónico" required="">
-                            </div>
+                                    <input formControlName="email" type="text" name="email" id="email"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="Correo electrónico" required="">
+                                </div>
 
 
-                            <div>
+                                <div>
 
-                                <textarea formControlName="subject"  type="text" name="subject" id="subject" cols="30" rows="3"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Mensaje..."></textarea>
+                                    <textarea formControlName="subject" type="text" name="subject" id="subject"
+                                        cols="30" rows="3"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="Mensaje..."></textarea>
 
-                            </div>
+                                </div>
 
 
-                            <button type="submit"
-                                class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Enviar Mensaje</button>
+                                <button type="submit"
+                                    class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Enviar
+                                    Mensaje</button>
 
-                            
-                        </form>
+
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -75,20 +110,24 @@
     <div class="max-w-screen-xl  mx-auto px-4 lg:px-12">
         <div class="lg:grid lg:grid-cols-4 lg:gap-8 xl:gap-16">
             <div class="shrink-0 max-w-md lg:max-w-lg mx-auto">
-                <img class="w-25 dark:hidden rounded-lg shadow-lg dark:border " src="https://showsportcdp.com/wp-content/uploads/2024/09/1.png" alt="" />
+                <img class="w-25 dark:hidden rounded-lg shadow-lg dark:border "
+                    src="https://showsportcdp.com/wp-content/uploads/2024/09/1.png" alt="" />
 
             </div>
-            
-            <div class="shrink-0 max-w-md lg:max-w-lg mx-auto">
-                <img class="w-25 dark:hidden rounded-lg shadow-lg dark:border " src="https://showsportcdp.com/wp-content/uploads/2024/09/3.png" alt="" />
 
-            </div>
             <div class="shrink-0 max-w-md lg:max-w-lg mx-auto">
-                <img class="w-25 dark:hidden rounded-lg shadow-lg dark:border " src="https://showsportcdp.com/wp-content/uploads/2024/09/4.png" alt="" />
+                <img class="w-25 dark:hidden rounded-lg shadow-lg dark:border "
+                    src="https://showsportcdp.com/wp-content/uploads/2024/09/3.png" alt="" />
 
             </div>
             <div class="shrink-0 max-w-md lg:max-w-lg mx-auto">
-                <img class="w-25 dark:hidden rounded-lg shadow-lg dark:border " src="https://showsportcdp.com/wp-content/uploads/2024/09/2.png" alt="" />
+                <img class="w-25 dark:hidden rounded-lg shadow-lg dark:border "
+                    src="https://showsportcdp.com/wp-content/uploads/2024/09/4.png" alt="" />
+
+            </div>
+            <div class="shrink-0 max-w-md lg:max-w-lg mx-auto">
+                <img class="w-25 dark:hidden rounded-lg shadow-lg dark:border "
+                    src="https://showsportcdp.com/wp-content/uploads/2024/09/2.png" alt="" />
 
             </div>
         </div>
