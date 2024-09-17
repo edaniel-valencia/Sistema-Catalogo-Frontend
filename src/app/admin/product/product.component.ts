@@ -42,8 +42,10 @@ export class ProductComponent implements OnInit {
 
   myAppUrl: string = environments.endpoint;
   myAPIUrl: string = 'static/product/';
+  myAPIUrlDefault: string = 'static/default/Product-default.png';
 
   baseUrl: string = this.myAppUrl+this.myAPIUrl; // Asegúrate de que esta URL sea correcta
+  baseUrlDefault: string = this.myAppUrl+this.myAPIUrlDefault; // Asegúrate de que esta URL sea correcta
 
   // Variables de paginación
   totalItems: number = 0; // Este valor debería venir del backend

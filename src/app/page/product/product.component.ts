@@ -21,8 +21,10 @@ export class ProductComponent implements OnInit {
   categoryName?: string = ''; // Variable para almacenar el nombre de la categoría
 
   myAppUrl: string = environments.endpoint;
-  myAPIUrl: string = 'static/product/';
-  baseUrl: string = this.myAppUrl + this.myAPIUrl;
+  myAPIUrlProduct: string = 'static/product/';
+  myAPIUrlDefault: string = 'static/default/Product-default.png';
+  baseUrlProduct: string = this.myAppUrl + this.myAPIUrlProduct;
+  baseUrlDefault: string = this.myAppUrl + this.myAPIUrlDefault;
 
   constructor(
     private _categoryService: CategoryService,

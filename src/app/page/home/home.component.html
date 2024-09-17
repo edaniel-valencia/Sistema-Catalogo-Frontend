@@ -11,15 +11,15 @@
             <div class="relative h-56 overflow-hidden md:h-96">
                 <!-- Comprobamos que listBanner tenga datos -->
                 <ng-container *ngIf="listBanner.length > 0">
-                  <!-- Iteramos sobre cada item de listBanner -->
-                  <div *ngFor="let item of listBanner" class="hidden duration-500 ease-linear" data-carousel-item>
-                    <img *ngIf="item.Bimage" [src]="baseUrl + item.Bimage"
-                         class="rounded-l-lg absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                         alt="...">
-                  </div>
+                    <!-- Iteramos sobre cada item de listBanner -->
+                    <div *ngFor="let item of listBanner" class="hidden duration-500 ease-linear" data-carousel-item>
+                        <img *ngIf="item.Bimage" [src]="baseUrlBanner + item.Bimage"
+                            class="rounded-l-lg absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                            alt="...">
+                    </div>
                 </ng-container>
-              </div>
-              
+            </div>
+
             <!-- Slider controls -->
             <button type="button"
                 class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
@@ -157,6 +157,53 @@
 
 
 
+<section class="bg-white dark:bg-gray-900">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+        <!-- Título -->
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-2xl font-bold leading-tight text-gray-900 dark:text-white">Categorías</h2>
+
+            <div>
+                <a routerLink="/store"
+                    class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
+                    <span class="ml-2">Ver más </span>
+                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H4m12 0-4 4m4-4-4-4m3-4h2a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-2"/>
+                      </svg>
+                      
+                </a>
+                <!-- <button *ngIf="listCategory.length > 5" (click)="toggleShowAllCategories()"
+                    class="bg-blue-600 text-white px-4 py-2 rounded-lg">
+                    {{ showAllCategories ? 'Mostrar Menos' : 'Ver Todo' }}
+                </button> -->
+               
+            </div>
+        </div>
+
+
+        <div class="mb-3 grid gap-3 sm:grid-cols-3 md:mb-8 lg:grid-cols-3 xl:grid-cols-5">
+            <div *ngFor="let category of listCategory | slice:0:showCategoriesLimit"
+                class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800 flex flex-col items-center justify-center">
+                <div class="w-full h-full">
+                    <a [routerLink]="['/categories', category.Cid]">
+                        <div class="flex flex-col items-center justify-center">
+                            <img width="50%" class="dark:hidden" [src]="baseUrlCategory + category.Cimage" alt="" />
+                            <img width="50%" class="hidden dark:block" [src]="baseUrlCategory + category.Cimage"
+                                alt="" />
+                        </div>
+                        <div class="flex flex-col items-center justify-center">
+                            <p
+                                class="text-1xl font-extrabold leading-tight text-gray-900 dark:text-white text-center p-3">
+                                {{category.Cname}}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</section>
 
 
 

@@ -63,8 +63,9 @@
               <td class="px-4 py-3">{{ product.Pid }}</td>
               <th scope="row"
               class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white w-[1rem] truncate">
-              <img *ngIf="product.Pimage" [src]="baseUrl + product.Pimage" class="w-full h-full object-contain rounded-lg"
-                alt="Preview Image">
+              <!-- <img *ngIf="product.Pimage" [src]="baseUrl + product.Pimage" class="w-full h-full object-contain rounded-lg" alt="Preview Image"> -->
+                <img class="w-full h-full object-contain rounded-l dark:hidden" [src]="product.Pimage ? baseUrl + product.Pimage : baseUrlDefault" alt="Preview Image"/>
+            
             </th>
               <td scope="row"
                 class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white max-w-[12rem] truncate">
