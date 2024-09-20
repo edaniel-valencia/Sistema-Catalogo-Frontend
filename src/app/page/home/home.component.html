@@ -6,13 +6,14 @@
         <!-- <img src="./../../../assets/banner/usc1.png " class="mt-12 mb-12 rounded-lg" width="100%" alt=""> -->
 
 
-        <div id="animation-carousel" class="relative w-full " data-carousel="slide">
-            <!-- Carousel wrapper -->
-            <div class="relative h-56 overflow-hidden md:h-96">
+        
+	<div id="default-carousel" class="relative" data-carousel="static">
+        <!-- Carousel wrapper -->
+        <div class="overflow-hidden relative h-56 rounded-lg sm:h-64 xl:h-80 2xl:h-96">
                 <!-- Comprobamos que listBanner tenga datos -->
                 <ng-container *ngIf="listBanner.length > 0">
                     <!-- Iteramos sobre cada item de listBanner -->
-                    <div *ngFor="let item of listBanner" class="hidden duration-500 ease-linear" data-carousel-item>
+                    <div *ngFor="let item of listBanner" class="hidden duration-700 ease-in-out" data-carousel-item>
                         <img *ngIf="item.Bimage" [src]="baseUrlBanner + item.Bimage"
                             class="rounded-l-lg absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                             alt="...">
@@ -47,6 +48,10 @@
                     <span class="sr-only">Next</span>
                 </span>
             </button>
+<link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+
+
         </div>
 
         <a href="#"
@@ -167,16 +172,18 @@
                 <a routerLink="/store"
                     class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
                     <span class="ml-2">Ver más </span>
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H4m12 0-4 4m4-4-4-4m3-4h2a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-2"/>
-                      </svg>
-                      
+                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M16 12H4m12 0-4 4m4-4-4-4m3-4h2a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-2" />
+                    </svg>
+
                 </a>
                 <!-- <button *ngIf="listCategory.length > 5" (click)="toggleShowAllCategories()"
                     class="bg-blue-600 text-white px-4 py-2 rounded-lg">
                     {{ showAllCategories ? 'Mostrar Menos' : 'Ver Todo' }}
                 </button> -->
-               
+
             </div>
         </div>
 

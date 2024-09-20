@@ -8,22 +8,16 @@ import { filter } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit {
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    // Manejar la navegación y re-inicializar Flowbite
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => {
+   
       initFlowbite();
-    });
+   
 
    
   }
 
-  ngAfterViewInit(): void {
-    initFlowbite();
-  }
 }

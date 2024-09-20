@@ -8,7 +8,7 @@ import { ProductComponent } from './product/product.component';
 import { BannerComponent } from './banner/banner.component';
 const routes: Routes = [
   { path: '', component: HomeComponent},
-  { path: 'home', component: HomeComponent},
+  { path: 'dashboard', component: HomeComponent},
   { path: 'products', component: ProductComponent},
   { path: 'categories', component: CategoryComponent},
   { path: 'roles', component: RoleComponent},

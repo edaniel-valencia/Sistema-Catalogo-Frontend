@@ -34,8 +34,8 @@ export class BannerService {
   }
 
   readBannerPublic(): Observable<Banner[]> {
-    const params = new HttpParams()
-    return this.http.get<Banner[]>(`${this.myAppUrl}${this.myAPIUrl}/readPublic`, {params});
+   
+    return this.http.get<Banner[]>(`${this.myAppUrl}${this.myAPIUrl}/readPublic`);
   }
 
   updateBanner(bannerId: number, banner: Banner, file: File): Observable<any> {    

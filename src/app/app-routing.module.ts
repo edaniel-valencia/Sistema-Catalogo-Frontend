@@ -8,7 +8,6 @@ import { HomeComponent } from './admin/home/home.component';
 import { PageComponent } from './page/page.component';
 
 const routes: Routes = [
-  {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: SigInComponent},
   
